@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio - Shafnat Fuaini Ramadhan</title>
+    <!-- Muat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Muat Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Konfigurasi Font Global */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Style untuk scroll-spy dan smooth scrolling */
+        section {
+            padding-top: 5rem; /* Menyesuaikan dengan tinggi navbar */
+            margin-top: -5rem;
+        }
+        .nav-link.active {
+            color: #10B981 !important; /* Warna hijau emerald */
+            font-weight: 600;
+        }
+        /* Custom ring for focus (optional, but nice) */
+        .ring-custom:focus {
+            --tw-ring-color: #10B981;
+            box-shadow: 0 0 0 2px var(--tw-ring-color);
+        }
+        
+        /* Kelas untuk Fade-In Animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Keyframe untuk Wiggle (Goyangan) */
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            20% { transform: rotate(-3deg); }
+            40% { transform: rotate(3deg); }
+            60% { transform: rotate(-3deg); }
+            80% { transform: rotate(3deg); }
+        }
+
+        /* Kelas untuk Menerapkan Wiggle */
+        .wiggle-on-hover:hover .icon-wiggle {
+            animation: wiggle 0.5s ease-in-out;
+        }
+
+        /* --- TYPEWRITER ANIMATION CSS --- */
+        #typewriter-text {
+            /* Sembunyikan teks awal */
+            opacity: 0; 
+            overflow: hidden; /* Pastikan teks yang belum diketik tersembunyi */
+            border-right: .15em solid #059669; /* Cursor */
+            white-space: nowrap; /* Mencegah wrap */
+            margin: 0 auto; 
+            letter-spacing: .05em; /* Memberikan sedikit spasi untuk tampilan mengetik */
+            animation: blink-caret 0.75s step-end infinite;
+            display: inline-block; /* Agar border-right (cursor) berfungsi */
+        }
+        
+        /* Keyframes untuk cursor berkedip */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #059669; } /* Emerald-600 */
+        }
+        /* --- END TYPEWRITER ANIMATION CSS --- */
+
+        /* Parallax Styling: Memastikan elemen diposisikan relatif terhadap Hero */
+        #hero-illustration {
+            will-change: transform; /* Hint untuk browser agar animasi lebih lancar */
+            transition: transform 0.1s ease-out;
+        }
+
+        /* --- CUSTOM SCROLLBAR STYLING --- */
+        /* Webkit browsers (Chrome, Safari) */
+        ::-webkit-scrollbar {
+            width: 8px; /* Lebar scrollbar vertikal */
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Warna track (latar belakang) */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #34D399; /* Warna thumb (bilah yang digulir) - Emerald-400 */
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10B981; /* Warna saat di-hover - Emerald-600 */
+        }
+        /* --- END CUSTOM SCROLLBAR STYLING --- */
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navbar/Header (Fixed) -->
+    <header id="navbar" class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-md">
+        <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#hero" class="text-xl font-bold text-gray-900 transition-colors hover:text-emerald-600">S.F. Ramadhan</a>
+                </div>
+                <!-- Menu Desktop -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#ringkasan" class="nav-link text-gray-600 hover:text-emerald-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Ringkasan</a>
+                        <a href="#keahlian" class="nav-link text-gray-600 hover:text-emerald-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Keahlian</a>
+                        <a href="#pengalaman" class="nav-link text-gray-600 hover:text-emerald-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Pengalaman</a>
+                        <a href="#pendidikan" class="nav-link text-gray-600 hover:text-emerald-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Pendidikan</a>
+                        <a href="#kontak" class="nav-link text-gray-600 hover:text-emerald-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Kontak</a>
+                    </div>
+                </div>
+                <!-- Tombol Mobile Menu -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500" aria-expanded="false">
+                        <span class="sr-only">Buka menu utama</span>
+                        <!-- Icon menu -->
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu (Tersembunyi) -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#ringkasan" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-emerald-600">Ringkasan</a>
+                <a href="#keahlian" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-emerald-600">Keahlian</a>
+                <a href="#pengalaman" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-emerald-600">Pengalaman</a>
+                <a href="#pendidikan" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-emerald-600">Pendidikan</a>
+                <a href="#kontak" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-emerald-600">Kontak</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Konten Utama -->
+    <main class="pt-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+            <!-- Bagian 1: Hero Section (Diperkenalkan) -->
+            <!-- Hero section tidak diberi fade-in karena selalu terlihat -->
+            <section id="hero" class="flex flex-col md:flex-row items-center justify-between min-h-[calc(100vh-4rem)] pt-12 md:pt-0">
+                <!-- LEBAR TEKS DIBUAT 4/5 -->
+                <div class="md:w-4/5">
+                    <p class="text-xl text-emerald-600 font-semibold mb-2">Halo, saya</p>
+                    <h1 class="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-tight">
+                        <!-- Wrapper untuk animasi typewriter -->
+                        <span id="typewriter-text">Shafnat Fuaini Ramadhan</span>
+                    </h1>
+                    <h2 class="mt-3 text-2xl sm:text-3xl font-semibold text-gray-600">Full Stack Developer - Project KK | Founder - Project KK</h2>
+                    <p class="mt-4 text-lg text-gray-500">Undergraduate Information System Student at Telkom University</p>
+                    <div class="mt-8 flex space-x-4">
+                        <a href="#kontak" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-lg text-white bg-emerald-600 hover:bg-emerald-700 transition duration-300 transform hover:scale-105">
+                            Hubungi Saya <i data-lucide="mail" class="ml-2 h-5 w-5"></i>
+                        </a>
+                        <a href="www.linkedin.com/in/shafnat-fuaini-ramadhan" target="_blank" class="inline-flex items-center px-6 py-3 border border-emerald-500 text-base font-medium rounded-lg shadow-lg text-emerald-600 bg-white hover:bg-emerald-50 transition duration-300 transform hover:scale-105">
+                            LinkedIn <i data-lucide="linkedin" class="ml-2 h-5 w-5"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Ilustrasi Placeholder (LEBAR DIBUAT 1/5) -->
+                <div class="md:w-1/5 mt-12 md:mt-0 flex justify-center">
+                    <div id="hero-illustration" class="w-64 h-64 sm:w-80 sm:h-80 rounded-full shadow-2xl flex items-center justify-center border-4 border-emerald-500 overflow-hidden">
+                        <i data-lucide="user" class="w-24 h-24 text-gray-500"></i>
+                        <!-- Catatan: Untuk foto profil, ganti div di atas dengan tag img seperti di bawah (hapus komentar): -->
+                        <img src="fotoDiri.png" alt="Foto Profil">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bagian 2: Ringkasan -->
+            <section id="ringkasan" class="py-16">
+                <div class="fade-in-section bg-white p-8 sm:p-12 rounded-xl shadow-2xl border border-gray-100 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6 border-b-2 border-emerald-500 pb-2 flex items-center">
+                        <i data-lucide="clipboard-list" class="w-8 h-8 mr-3 text-emerald-600"></i> Ringkasan Profil
+                    </h2>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Saya adalah <b>mahasiswa Telkom University angkatan 2024</b> dengan pengalaman dalam kepemimpinan dan organisasi. Sebagai <b>Full Stack Developer</b> dan <b>Founder Project KK</b>, saya memiliki latar belakang kuat di Sistem Informasi. Saya bersemangat untuk memadukan kemampuan teknis dengan pengalaman organisasi yang luas.
+                    </p>
+                </div>
+            </section>
+            
+            <!-- Bagian 3: Keahlian -->
+            <section id="keahlian" class="py-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-8 border-b-2 border-emerald-500 pb-2 flex items-center">
+                    <i data-lucide="gem" class="w-8 h-8 mr-3 text-emerald-600"></i> Keahlian Teratas
+                </h2>
+                <div class="fade-in-section grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Kartu Keahlian -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-[1.03] border border-gray-100">
+                        <i data-lucide="brain" class="w-8 h-8 text-emerald-500 mb-3"></i>
+                        <h3 class="text-xl font-semibold text-gray-900">Logic Programming</h3>
+                        <p class="text-gray-600 mt-2">Fondasi kuat dalam penyelesaian masalah dan pengembangan algoritma.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-[1.03] border border-gray-100">
+                        <i data-lucide="store" class="w-8 h-8 text-emerald-500 mb-3"></i>
+                        <h3 class="text-xl font-semibold text-gray-900">Point of Sale (POS) Systems</h3>
+                        <p class="text-gray-600 mt-2">Pengalaman dalam implementasi dan pengelolaan sistem kasir dan transaksi.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-[1.03] border border-gray-100">
+                        <i data-lucide="layout-grid" class="w-8 h-8 text-emerald-500 mb-3"></i>
+                        <h3 class="text-xl font-semibold text-gray-900">Information Systems</h3>
+                        <p class="text-gray-600 mt-2">Pemahaman mendalam tentang arsitektur dan manajemen sistem informasi.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bagian 4: Pengalaman -->
+            <section id="pengalaman" class="py-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-8 border-b-2 border-emerald-500 pb-2 flex items-center">
+                    <i data-lucide="briefcase" class="w-8 h-8 mr-3 text-emerald-600"></i> Pengalaman Kerja & Organisasi
+                </h2>
+
+                <div class="fade-in-section space-y-10">
+                    
+                    <!-- Pengalaman 1: Ko+Lab Telkom University -->
+                    <div class="relative pl-8 sm:pl-16 after:absolute after:top-0 after:left-0 after:w-2 after:h-full after:bg-emerald-200 after:rounded-full">
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-emerald-500 relative hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
+                            <span class="absolute -left-10 top-0 w-4 h-4 bg-emerald-600 rounded-full border-4 border-white"></span>
+                            <h3 class="text-2xl font-semibold text-gray-900">Ko+Lab Telkom University</h3>
+                            <p class="text-emerald-600 font-medium mt-1">Dishwasher, Busboy, Waiter, Support Team</p>
+                            <p class="text-sm text-gray-500 mb-4">September 2025 - Sekarang (2 bulan) | Bandung, Jawa Barat, Indonesia</p>
+                            <p class="text-gray-700">Berperan ganda dalam tim dukungan, menunjukkan kemampuan kerja tim dan multitasking yang kuat.</p>
+                        </div>
+                    </div>
+
+                    <!-- Pengalaman 2: Laboratorium Fakultas Ilmu Terapan -->
+                    <div class="relative pl-8 sm:pl-16 after:absolute after:top-0 after:left-0 after:w-2 after:h-full after:bg-emerald-200 after:rounded-full">
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-emerald-500 relative hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
+                            <span class="absolute -left-10 top-0 w-4 h-4 bg-emerald-600 rounded-full border-4 border-white"></span>
+                            <h3 class="text-2xl font-semibold text-gray-900">Laboratorium Fakultas Ilmu Terapan</h3>
+                            <p class="text-emerald-600 font-medium mt-1">Koordinator & Asisten Praktikum Mata Kuliah</p>
+                            <p class="text-sm text-gray-500 mb-4">September 2025 - Sekarang (2 bulan) | Bandung, Jawa Barat, Indonesia</p>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                                <li>Koordinator Asisten Praktikum Mata Kuliah <b>User Interface Design</b></li>
+                                <li>Asisten Praktikum Mata Kuliah <b>Algoritma Pemograman</b></li>
+                                <li>Asisten Praktikum Mata Kuliah <b>User Interface Design</b></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Pengalaman 3: HMDSI FIT Telkom University -->
+                    <div class="relative pl-8 sm:pl-16 after:absolute after:top-0 after:left-0 after:w-2 after:h-full after:bg-emerald-200 after:rounded-full">
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-emerald-500 relative hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
+                            <span class="absolute -left-10 top-0 w-4 h-4 bg-emerald-600 rounded-full border-4 border-white"></span>
+                            <h3 class="text-2xl font-semibold text-gray-900">HMDSI FIT Telkom University</h3>
+                            <p class="text-emerald-600 font-medium mt-1">Liaison Officer</p>
+                            <p class="text-sm text-gray-500 mb-4">Mei 2025 - Sekarang (6 bulan) | Kabupaten Bandung Barat, Jawa Barat, Indonesia</p>
+                            <p class="text-gray-700">Bertanggung jawab sebagai penghubung dan komunikasi antar pihak.</p>
+                        </div>
+                    </div>
+
+                    <!-- Pengalaman 4: Freelance Photographer -->
+                    <div class="relative pl-8 sm:pl-16 after:absolute after:top-0 after:left-0 after:w-2 after:h-full after:bg-emerald-200 after:rounded-full">
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-emerald-500 relative hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
+                            <span class="absolute -left-10 top-0 w-4 h-4 bg-emerald-600 rounded-full border-4 border-white"></span>
+                            <h3 class="text-2xl font-semibold text-gray-900">Freelance Photographer</h3>
+                            <p class="text-emerald-600 font-medium mt-1">Freelance</p>
+                            <p class="text-sm text-gray-500 mb-4">Juli 2020 - Sekarang (5 tahun 4 bulan)</p>
+                            <p class="text-gray-700">Seorang freelancer yang memiliki hobi dalam fotografi. Dipercaya sebagai fotografer utama dalam berbagai kegiatan/event organisasi (termasuk OSIS). Hingga kini, masih aktif melanjutkan hobi ini.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Pengalaman Tambahan -->
+                    <h3 class="text-2xl font-bold text-gray-900 pt-6">Pengalaman Organisasi & Event Lainnya</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <!-- OSIS Bendahara 2 -->
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-gray-300 hover:shadow-xl transition duration-300 transform hover:scale-[1.03]">
+                            <h4 class="text-xl font-semibold text-gray-900">OSIS Bendahara 2</h4>
+                            <p class="text-emerald-600 mt-1">OSIS SMAS BPS&K 1 Jakarta</p>
+                            <p class="text-sm text-gray-500 mb-3">Agustus 2022 - Agustus 2023 (1 tahun 1 bulan)</p>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 text-sm">
+                                <li>Bagian dari tujuh pemimpin utama struktur OSIS.</li>
+                                <li>Kameramen utama di tiap event OSIS.</li>
+                                <li>Anggota divisi logistik, keamanan, dan acara pada event tertentu.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Publikasi dan Dokumentasi Porseni FIT -->
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-gray-300 hover:shadow-xl transition duration-300 transform hover:scale-[1.03]">
+                            <h4 class="text-xl font-semibold text-gray-900">Publikasi dan Dokumentasi</h4>
+                            <p class="text-emerald-600 mt-1">Porseni Fakultas Ilmu Terapan</p>
+                            <p class="text-sm text-gray-500 mb-3">Mei 2025 - Juli 2025 (3 bulan)</p>
+                            <p class="text-gray-700 text-sm">Bertanggung jawab dalam seluruh aspek publikasi dan dokumentasi acara.</p>
+                        </div>
+
+                        <!-- GDGOC & CCI Telkom University -->
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-gray-300 hover:shadow-xl transition duration-300 transform hover:scale-[1.03]">
+                            <h4 class="text-xl font-semibold text-gray-900">Member</h4>
+                            <p class="text-emerald-600 mt-1">GDGOC & Central Computer Improvement Telkom University</p>
+                            <p class="text-sm text-gray-500 mb-3">Desember 2024 - September 2025 (10 bulan)</p>
+                            <p class="text-gray-700 text-sm">Aktif sebagai anggota di dua organisasi berbasis teknologi dan sistem informasi kampus.</p>
+                        </div>
+
+                        <!-- OSIS Koordinator Ekstrakurikuler Hadroh -->
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-gray-300 hover:shadow-xl transition duration-300 transform hover:scale-[1.03]">
+                            <h4 class="text-xl font-semibold text-gray-900">Koordinator Ekstrakurikuler Hadroh</h4>
+                            <p class="text-emerald-600 mt-1">OSIS SMAS BPS&K 1 Jakarta</p>
+                            <p class="text-sm text-gray-500 mb-3">Agustus 2020 - Agustus 2021 (1 tahun 1 bulan)</p>
+                            <p class="text-gray-700 text-sm">Mengkoordinir kegiatan ekstrakurikuler Hadroh di sekolah.</p>
+                        </div>
+                        
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Bagian 5: Pendidikan -->
+            <section id="pendidikan" class="py-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-8 border-b-2 border-emerald-500 pb-2 flex items-center">
+                    <i data-lucide="graduation-cap" class="w-8 h-8 mr-3 text-emerald-600"></i> Pendidikan
+                </h2>
+                <div class="fade-in-section bg-white p-8 rounded-xl shadow-2xl border border-gray-100 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
+                    <h3 class="text-3xl font-bold text-gray-900">Universitas Telkom</h3>
+                    <p class="text-xl text-emerald-600 font-medium mt-1">D3 Sistem Informasi, Sistem Informasi</p>
+                    <p class="text-lg text-gray-500 mt-2">Masuk Februari 2025</p>
+                </div>
+
+                <h3 class="text-2xl font-bold text-gray-900 pt-10 mb-6">Pengalaman Pendidikan & Organisasi Lain</h3>
+                <div class="fade-in-section grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-gray-300 hover:shadow-xl transition duration-300 transform hover:scale-[1.03]">
+                        <h4 class="text-xl font-semibold text-gray-900">Ketua Ekstrakurikuler Mading</h4>
+                        <p class="text-emerald-600 mt-1">Mading SMPN 199</p>
+                        <p class="text-sm text-gray-500 mb-3">Juli 2018 - Juli 2019 (1 tahun 1 bulan)</p>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Bagian 6: Kontak -->
+            <section id="kontak" class="py-16">
+                <div class="fade-in-section bg-emerald-600 p-8 sm:p-12 rounded-xl shadow-2xl text-white hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
+                    <h2 class="text-4xl font-bold mb-6 border-b-2 border-white/50 pb-2 flex items-center">
+                        <i data-lucide="phone-call" class="w-8 h-8 mr-3"></i> Hubungi Saya
+                    </h2>
+                    <div class="space-y-4 text-lg">
+                        <div class="flex items-center space-x-3 wiggle-on-hover">
+                            <i data-lucide="map-pin" class="w-6 h-6 flex-shrink-0 icon-wiggle"></i>
+                            <p>Gedung Bangkit Telkom University, Jl. Telekomunikasi, Terusan Buah Batu, Bandung, Indonesia 40257</p>
+                        </div>
+                        <div class="flex items-center space-x-3 wiggle-on-hover">
+                            <i data-lucide="smartphone" class="w-6 h-6 flex-shrink-0 icon-wiggle"></i>
+                            <p>085215376975 (Home)</p>
+                        </div>
+                        <div class="flex items-center space-x-3 wiggle-on-hover">
+                            <i data-lucide="mail" class="w-6 h-6 flex-shrink-0 icon-wiggle"></i>
+                            <p><a href="mailto:shafnatfuaini@student.telkomuniversity.ac.id" class="underline hover:text-emerald-200">shafnatfuaini@student.telkomuniversity.ac.id</a></p>
+                        </div>
+                        <div class="flex items-center space-x-3 wiggle-on-hover">
+                            <i data-lucide="linkedin" class="w-6 h-6 flex-shrink-0 icon-wiggle"></i>
+                            <p><a href="www.linkedin.com/in/shafnat-fuaini-ramadhan" target="_blank" class="underline hover:text-emerald-200">shafnat-fuaini-ramadhan (LinkedIn)</a></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white p-6 text-center">
+        <p>&copy; 2025 Shafnat Fuaini Ramadhan. Dibangun dengan Tailwind CSS.</p>
+    </footer>
+
+    <script>
+        // Menginisialisasi ikon Lucide
+        lucide.createIcons();
+
+        // Logika Mobile Menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Logika Scroll-Spy (Menandai link aktif saat scroll)
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 100) { // Offset untuk penyesuaian
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.href.includes(current)) {
+                    link.classList.add("active");
+                }
+            });
+            
+            // Panggil logika Parallax saat scroll
+            handleParallax();
+        });
+
+        // Menutup menu mobile setelah klik link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Mengatur link navigasi untuk menggunakan smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    // Hitung posisi scroll yang disesuaikan dengan tinggi navbar
+                    const navbarHeight = document.getElementById('navbar').offsetHeight;
+                    const targetPosition = targetElement.offsetTop - navbarHeight;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Logika Animasi Fade-In Saat Scroll (Intersection Observer)
+        const fadeInSections = document.querySelectorAll('.fade-in-section');
+
+        const observerOptions = {
+            root: null, // Mengamati viewport
+            rootMargin: '0px',
+            threshold: 0.2 // Pemicu saat 20% elemen terlihat
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Hentikan pengamatan setelah animasi dipicu
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        fadeInSections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- LOGIKA TYPEWRITER ---
+        const typewriterElement = document.getElementById('typewriter-text');
+        const textToType = typewriterElement.textContent.trim();
+        typewriterElement.textContent = ''; // Hapus teks asli
+
+        let charIndex = 0;
+        const typingSpeed = 75; // Kecepatan pengetikan dalam ms
+
+        function typeWriter() {
+            // Tampilkan elemen agar cursor terlihat
+            typewriterElement.style.opacity = 1;
+            
+            if (charIndex < textToType.length) {
+                typewriterElement.textContent += textToType.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, typingSpeed);
+            } else {
+                // Setelah selesai mengetik, biarkan cursor berkedip 
+                // (Ini sudah diatur oleh CSS Keyframes blink-caret)
+            }
+        }
+
+        // --- LOGIKA PARALLAX ---
+        const heroIllustration = document.getElementById('hero-illustration');
+        const parallaxSpeed = 0.2; // Kecepatan parallax (0.2 berarti bergerak 20% dari kecepatan scroll)
+
+        function handleParallax() {
+            if (!heroIllustration) return; // Keluar jika elemen tidak ada
+            
+            // Dapatkan posisi scroll saat ini
+            const scrollY = window.pageYOffset;
+            
+            // Hitung pergeseran vertikal
+            const yOffset = scrollY * parallaxSpeed;
+            
+            // Terapkan transform CSS. Maksimal pergeseran -50px untuk menghindari elemen hilang.
+            const maxParallax = 50;
+            const newY = Math.min(yOffset, maxParallax); 
+
+            // Terapkan transform
+            heroIllustration.style.transform = `translateY(${newY}px)`;
+        }
+        
+        // Panggil handler Parallax saat halaman dimuat (untuk memastikan posisi awal)
+        window.addEventListener('load', handleParallax);
+
+        // Mulai animasi setelah halaman dimuat
+        window.onload = function() {
+            typeWriter();
+            // Panggil juga lucide.createIcons() yang biasanya di akhir
+            lucide.createIcons();
+        };
+
+    </script>
+</body>
+</html>
